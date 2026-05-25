@@ -1,0 +1,53 @@
+name: Regenerate API Clients
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/openapi/openapi.json'
+
+jobs:
+  regenerate-clients:
+    name: Regenerate API Client Code
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: src/FullStack.UI/package-lock.json
+
+      - name: Install NSwag
+        run: dotnet tool install --global NSwag.ConsoleCore --version 14.*
+
+      - name: Regenerate C# client
+        working-directory: src/FullStack.ApiClient
+        run: dotnet nswag run nswag.json /runtime:Net80
+
+      - name: Install frontend dependencies
+        working-directory: src/FullStack.UI
+        run: npm ci
+
+      - name: Regenerate TypeScript client
+        working-directory: src/FullStack.UI
+        run: npm run generate:api || true
+
+      - name: Commit regenerated files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: regenerate API clients from updated OpenAPI spec"
+          file_pattern: |
+            src/FullStack.ApiClient/Generated/**
+            src/FullStack.UI/src/app/api/generated/**
