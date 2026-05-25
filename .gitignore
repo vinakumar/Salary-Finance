@@ -1,0 +1,39 @@
+# .NET
+bin/
+obj/
+*.user
+appsettings.Development.json
+.vs/
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+project.lock.json
+/packages/
+
+# Angular
+node_modules/
+dist/
+.angular/
+tmp/
+
+# IDE
+.idea/
+*.DotSettings.user
+
+# OS
+Thumbs.db
+.DS_Store
+Desktop.ini
+ehthumbs.db
+
+# Misc
+*.log
+*.swp
+*.swo
+
+# Test artifacts
+coverage/
+playwright-report/
+test-results/

@@ -1,0 +1,65 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-api",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "${workspaceFolder}/src/FullStack.Api"],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "build-all",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "${workspaceFolder}/FullStack.ApiClientGen.sln"],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "test-unit",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["test", "${workspaceFolder}/tests/FullStack.Api.UnitTests"],
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "test-integration",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["test", "${workspaceFolder}/tests/FullStack.Api.IntegTests"],
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "test-all",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["test", "${workspaceFolder}/FullStack.ApiClientGen.sln"],
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "generate-client",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["nswag", "run", "nswag.json"],
+      "options": {
+        "cwd": "${workspaceFolder}/src/FullStack.ApiClient"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "generate-ng-client",
+      "type": "npm",
+      "script": "generate:api",
+      "path": "src/FullStack.UI",
+      "problemMatcher": []
+    }
+  ]
+}

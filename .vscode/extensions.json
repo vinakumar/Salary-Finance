@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "ms-dotnettools.vscode-dotnet-runtime",
+    "angular.ng-template",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "humao.rest-client",
+    "ms-playwright.playwright",
+    "eamodio.gitlens",
+    "github.vscode-github-actions",
+    "nswag.nswag"
+  ]
+}

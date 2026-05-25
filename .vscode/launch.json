@@ -1,0 +1,64 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🟢 API: FullStack.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/src/FullStack.Api/bin/Debug/net8.0/FullStack.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/FullStack.Api",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000"
+      },
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "https://localhost:5001/swagger"
+      }
+    },
+    {
+      "name": "🔵 UI: Angular Dev Server",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "cwd": "${workspaceFolder}/src/FullStack.UI",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "Local:\\s+(http://\\S+)",
+        "uriFormat": "http://localhost:4200"
+      }
+    },
+    {
+      "name": "🧪 Tests: Backend Unit",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "test-unit",
+      "program": "dotnet",
+      "args": ["test", "${workspaceFolder}/tests/FullStack.Api.UnitTests"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "🧪 Tests: Backend Integration",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "test-integration",
+      "program": "dotnet",
+      "args": ["test", "${workspaceFolder}/tests/FullStack.Api.IntegTests"],
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "🚀 Full Stack (API + UI)",
+      "configurations": [
+        "🟢 API: FullStack.Api",
+        "🔵 UI: Angular Dev Server"
+      ]
+    }
+  ]
+}
