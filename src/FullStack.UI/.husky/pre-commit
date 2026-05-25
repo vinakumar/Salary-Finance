@@ -1,0 +1,2 @@
+npx lint-staged
+cd ../../ && dotnet format FullStack.ApiClientGen.sln --verify-no-changes

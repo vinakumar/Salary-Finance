@@ -1,0 +1,138 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: 'Inter, Roboto, sans-serif',
+      plain-family: 'Inter, Roboto, sans-serif',
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: 'Inter, Roboto, sans-serif',
+      plain-family: 'Inter, Roboto, sans-serif',
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+html {
+  @include mat.all-component-themes($theme);
+  @include mat.typography-hierarchy($theme);
+}
+
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+  background-color: #1a1a2e;
+  color: #eaeaea;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', Roboto, 'Helvetica Neue', sans-serif;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.dark-theme body,
+.dark-theme {
+  background: #1a1a2e;
+}
+
+.mat-app-background {
+  min-height: 100vh;
+}
+
+.page-container {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// Better table styling
+table.mat-mdc-table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.mat-mdc-row:hover {
+  background-color: rgba(0, 120, 212, 0.04) !important;
+}
+
+// Card improvements
+.mat-mdc-card {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+// Fab button
+.mat-mdc-fab.mat-primary,
+.mat-mdc-extended-fab.mat-primary {
+  border-radius: 28px;
+}
+
+// Toolbar
+mat-toolbar {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Snackbar
+.mat-mdc-snack-bar-container {
+  border-radius: 8px !important;
+}
+
+// Form fields
+.mat-mdc-form-field {
+  margin-bottom: 4px;
+}
+
+// Header section
+.header {
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin: 0;
+  }
+}
+
+.dark-theme .header h1 {
+  color: #eaeaea;
+}
